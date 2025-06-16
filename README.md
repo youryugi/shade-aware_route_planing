@@ -7,7 +7,7 @@ You can run main.py directly and adjust the shadow weight to control your prefer
 
 If you wish to simulate other locations or time periods (within Osaka City), please load the corresponding data from the tran and bldg folders.
 For areas outside Osaka, refer to the PLATEAU dataset.
-Then run precomputed.py to generate the corresponding offline shadow data, and proceed with main.py
+Then run precomputed precompute_shadow_ratios_offline.py and precompute_shadows_offline.py to generate the corresponding offline shadow data, and proceed with main.py
 
 
 
