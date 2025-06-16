@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ab232e3-12f7-4f3e-94af-27d956bb8b1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cache/05a43f21bb05919034eff4dbb440c02570f26a12.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/osmnx_graph_34.65015207474573_34.62460168764661_135.5501897775654_135.51224918398333.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>

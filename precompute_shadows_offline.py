@@ -8,12 +8,12 @@ from astral.sun import elevation, azimuth
 from datetime import datetime, timedelta, timezone
 import pickle
 
-interval_minutes=1
+interval_minutes = 1
 start_dt = datetime(2024, 12, 5, 9, tzinfo=timezone(timedelta(hours=9)))
 end_dt = datetime(2024, 12, 5, 10, tzinfo=timezone(timedelta(hours=9)))
 
 #######################################
-# 函数1：计算单个时间点的合并阴影
+# Function 1: Compute merged shadow for a single time point
 #######################################
 def compute_shadow_union_at_time(building_gdf, date_time, height_column='default_height'):
     city = LocationInfo(
@@ -27,7 +27,7 @@ def compute_shadow_union_at_time(building_gdf, date_time, height_column='default
     solar_azi = azimuth(city.observer, date_time)
 
     if solar_elev <= 0:
-        return None  # 没太阳
+        return None  # No sunlight
 
     sun_vec = np.array([
         np.cos(np.radians(solar_elev)) * np.sin(np.radians(solar_azi)),
@@ -39,7 +39,7 @@ def compute_shadow_union_at_time(building_gdf, date_time, height_column='default
         polygons = geom.geoms if geom.geom_type == 'MultiPolygon' else [geom]
         shadow_lines = []
         for poly in polygons:
-            # 只取xy, 丢掉z
+            # Only use xy, ignore z
             base_coords = [(x, y) for x, y, *rest in poly.exterior.coords]
 
             shadow_coords = [
@@ -68,13 +68,13 @@ def compute_shadow_union_at_time(building_gdf, date_time, height_column='default
 
 
 #######################################
-# 函数2：批量计算所有时刻的阴影
+# Function 2: Batch compute shadows for all time slices
 #######################################
 def precompute_shadow_unions(building_gdf, start_dt, end_dt, interval_minutes, height_column='default_height'):
     current_time = start_dt
     time_to_union = {}
     while current_time <= end_dt:
-        print(f"正在计算: {current_time}...")
+        print(f"Computing: {current_time}...")
         union_geom = compute_shadow_union_at_time(building_gdf, current_time, height_column)
         time_to_union[current_time] = union_geom
         current_time += timedelta(minutes=interval_minutes)
@@ -82,7 +82,7 @@ def precompute_shadow_unions(building_gdf, start_dt, end_dt, interval_minutes, h
 
 
 #######################################
-# 读取GML数据
+# Read GML building data
 #######################################
 
 bldg_gml_files = [
@@ -95,7 +95,6 @@ bldg_gml_files = [
     r"bldg/51357471_bldg_6697_op.gml",
     r"bldg/51357472_bldg_6697_op.gml",
     r"bldg/51357473_bldg_6697_op.gml"
-
 ]
 
 bldg_gdf_list = [gpd.read_file(file) for file in bldg_gml_files]
@@ -104,6 +103,7 @@ bldg_merged_gdf = pd.concat(bldg_gdf_list, ignore_index=True)
 if bldg_merged_gdf.crs.to_epsg() != 6669:
     bldg_merged_gdf = bldg_merged_gdf.to_crs(epsg=6669)
 
+# Determine the height column, or use default if not found
 height_column = None
 for col in bldg_merged_gdf.columns:
     if 'height' in col.lower():
@@ -116,35 +116,35 @@ else:
     bldg_merged_gdf[height_column] = bldg_merged_gdf[height_column].fillna(3)
 
 #######################################
-# 设置时间段
+# Set time range for shadow calculation
 #######################################
 
 
 #######################################
-# 开始批量计算并存储
+# Start batch computation and save results
 #######################################
 
-print(f"[INFO] 阴影计算范围: {start_dt} ~ {end_dt}, 每 {interval_minutes} 分钟")
+print(f"[INFO] Shadow calculation range: {start_dt} ~ {end_dt}, interval: {interval_minutes} minutes")
 time_to_union = precompute_shadow_unions(bldg_merged_gdf, start_dt, end_dt, interval_minutes, height_column)
 
 valid_count = sum(1 for v in time_to_union.values() if v)
-print(f"[INFO] 阴影计算完成，有效时间片数量: {valid_count}")
+print(f"[INFO] Shadow calculation complete, valid time slices: {valid_count}")
 
 #######################################
-# 存储
+# Save results
 #######################################
-# 自动拼接文件名
-# 获取边界框经纬度（单位：度）
-bounds = bldg_merged_gdf.to_crs(epsg=4326).total_bounds  # 转换为WGS84经纬度
-minx, miny, maxx, maxy = bounds  # 左下角 (minx, miny)，右上角 (maxx, maxy)
+# Automatically generate output file name
+# Get bounding box coordinates (in degrees)
+bounds = bldg_merged_gdf.to_crs(epsg=4326).total_bounds  # Convert to WGS84 lat/lon
+minx, miny, maxx, maxy = bounds  # Lower left (minx, miny), upper right (maxx, maxy)
 
-# 保留 4 位小数
+# Keep 4 decimal places
 minx_str = f"{minx:.4f}"
 miny_str = f"{miny:.4f}"
 maxx_str = f"{maxx:.4f}"
 maxy_str = f"{maxy:.4f}"
 
-# 拼接文件名
+# Compose output file name
 date_str = start_dt.strftime("%Y%m%d")
 start_str = start_dt.strftime("%H%M")
 end_str = end_dt.strftime("%H%M")
@@ -153,9 +153,9 @@ output_file = (
     f"LL_{minx_str}_{miny_str}_UR_{maxx_str}_{maxy_str}.pkl"
 )
 
-# 保存文件
+# Save to file
 with open(output_file, 'wb') as f:
     pickle.dump(time_to_union, f)
 
-print(f"[SUCCESS] 阴影缓存已保存至 {output_file}")
+print(f"[SUCCESS] Shadow cache saved to {output_file}")
 
