@@ -1,0 +1,12 @@
+fiona==1.9.6
+osmnx==1.9.3
+matplotlib
+network
+shapely
+pyproj
+pandas
+geopandas
+math
+pickle
+heapq
+astral

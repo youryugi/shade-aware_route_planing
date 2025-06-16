@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ab232e3-12f7-4f3e-94af-27d956bb8b1f" name="Changes" comment="" />
+    <list default="true" id="9ab232e3-12f7-4f3e-94af-27d956bb8b1f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/cache/05a43f21bb05919034eff4dbb440c02570f26a12.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/osmnx_graph_34.65015207474573_34.62460168764661_135.5501897775654_135.51224918398333.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,17 +26,21 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2y266U7eTX1t37rocZ2MkOm27Jt" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python.main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/79152/Desktop/OthersProgramme/shade-aware_route_planing"
+    "last_opened_file_path": "C:/Users/79152/Desktop/OthersProgramme/DX"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -50,5 +60,8 @@
       <updated>1749020145908</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
