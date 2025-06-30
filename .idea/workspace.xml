@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9ab232e3-12f7-4f3e-94af-27d956bb8b1f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +36,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/79152/Desktop/OthersProgramme/DX"
+    "last_opened_file_path": "C:/Users/79152/Desktop/beamforming"
   }
 }]]></component>
   <component name="SharedIndexes">
